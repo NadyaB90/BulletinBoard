@@ -1,0 +1,68 @@
+{% extends "board/base.html" %}
+{% load static %}
+
+
+<html lang="en">
+
+<body>
+
+{% block content %}
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <article class="media content-section">
+                <img class="rounded-circle account-img" src="{{ object.author.profile.image.url }}">
+                    <div class="media-body">
+                        <div class="article-metadata">
+                          <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
+                          <small class="text-muted">{{ object.date_created|date:"d F, Y" }}</small>
+                            {% if object.author == user %}
+                                <div>
+                                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'bulletin-update' object.id %}">Update</a>
+                                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'bulletin-delete' object.id %}">Delete</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    <h2 class="article-title">{{ object.title }}</h2>
+                <p class="article-content">{{ object.content }}</p>
+
+				<!-- If the file is a picture - show it. Else - hide image field -->
+		        <img class="fit-picture" src="{{ bulletin.file.url}}" width=50% height=50% onerror="this.onerror=null; this.remove()" />
+				<div>
+                    <!-- Add a link to download the file -->
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ bulletin.file.url}}" download="{{ bulletin.file.url}}">Download File</a>
+
+				</div>
+
+                <div>
+                    <br/><br/>
+                    <hr>
+                    <h4>Comments...</h4>
+                    <br/>
+                    <!-- "comments" -- is a related name of Comment model's bulletin field which connects to Bulletin model via ForeignKey -->
+                    {% if not bulletin.comments.all %}
+                        No Comments Yet...<a href="{% url 'comment_create' bulletin.pk %}">Add One</a>
+                    {% else %}
+                    <a href="{% url 'comment_create' bulletin.pk %}">Add Comment</a>
+                    <br/><br/>
+                        {% for comment in bulletin.comments.all %}
+                            <strong>
+                                {{ comment.username }} -
+                                {{ comment.date_added }}
+                            </strong>
+                            <br/>
+                            {{ comment.body }}
+                            <br/><br/>
+                        {% endfor %}
+                        <a href="{% url 'comment_create' bulletin.pk %}">Add Comment</a>
+                    {% endif %}
+                    <br/><br/>
+                </div>
+            </article>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}
+</body>
+</html>
