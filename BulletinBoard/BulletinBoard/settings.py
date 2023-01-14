@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-d%z24*(tt*a&wt(k&)k&!kf)vd42m=^k*so-k375)&zh+ttwi3'
+SECRET_KEY = '...'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -167,14 +167,14 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = 'profile'
 ACCOUNT_FORMS = {'/accounts/signup': 'users.forms.UserUpdateForm'}
 
-DEFAULT_FROM_EMAIL = 'lady.nadya20@inbox.ru'
+DEFAULT_FROM_EMAIL = '...'
 EMAIL_HOST = 'smtp.inbox.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'lady.nadya20'
-EMAIL_HOST_PASSWORD = 'butakova90BNN'
+EMAIL_HOST_USER = '...'
+EMAIL_HOST_PASSWORD = '...'
 EMAIL_USE_SSL = True
 
-SERVER_EMAIL = 'lady.nadya20@mail.ru'
+SERVER_EMAIL = '...'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
